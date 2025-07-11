@@ -1,6 +1,6 @@
 # Test EXPRESS
 
-A modern, secure, well-typed Express/TypeScript Users API with:
+Project to test express dockerization with:
 - DrizzleORM + Postgres
 - Redis caching
 - JWT Auth
