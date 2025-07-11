@@ -1,0 +1,47 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      # Database
+      PGHOST: postgres
+      PGPORT: ${PGPORT}
+      PGUSER: ${PGUSER}
+      PGPASSWORD: ${PGPASSWORD}
+      PGDATABASE: ${PGDATABASE}
+      DATABASE_URL: postgresql://${PGUSER}:${PGPASSWORD}@postgres:${PGPORT}/${PGDATABASE}
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: ${REDIS_PORT}
+      # JWT
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
+      JWT_REFRESH_EXPIRES_IN: ${JWT_REFRESH_EXPIRES_IN}
+      # Node
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+    ports:
+      - '${PORT}:${PORT}'
+    depends_on:
+      - postgres
+      - redis
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${PGUSER}
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_DB: ${PGDATABASE}
+    ports:
+      - '${PGPORT}:${PGPORT}'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - '${REDIS_PORT}:${REDIS_PORT}'
+volumes:
+  pgdata:
