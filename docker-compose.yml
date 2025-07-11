@@ -20,7 +20,7 @@ services:
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
       JWT_REFRESH_EXPIRES_IN: ${JWT_REFRESH_EXPIRES_IN}
       # Node
-      NODE_ENV: ${NODE_ENV}
+      NODE_ENV: production
       PORT: ${PORT}
     ports:
       - '${PORT}:${PORT}'

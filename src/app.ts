@@ -15,7 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(loggerMiddleware);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+if (process.env.NODE_ENV !== 'production') {
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+}
 app.use('/api/v1', createV1Router());
 
 app.use(errorHandler);
