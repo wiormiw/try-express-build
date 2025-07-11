@@ -10,6 +10,7 @@
     "start": "node dist/server.js",
     "migrate": "drizzle-kit generate && drizzle-kit push",
     "compose": "docker compose up -d",
+    "compose-deps": "docker compose up postgres redis -d",
     "compose-force": "docker compose up -d --force-recreate",
     "compose-build": "docker compose build --no-cache && docker compose up -d --force-recreate",
     "down": "docker compose down --remove-orphans"
